@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi plebita Idalia</title>
+    <style>
+        body {
+            font-size: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            background: linear-gradient(90deg, red , blue, purple);
+            background-size: 500% 100%;
+            animation: gradientShift 10s infinite;
+            position: relative;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .text {
+            z-index: 10;
+            font-size: 4em;
+            font-weight: bold;
+            text-shadow: 0 0 10px white, 0 0 20px white, 0 0 5px black;
+            animation: textGlow 1.5s ease-in-out infinite;
+            margin: 0;
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 10px white, 0 0 20px white, 0 0 5px black;
+            }
+            50% {
+                text-shadow: 0 0 20px yellow, 0 0 30px yellow, 0 0 5px black;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2em;
+            color: #ff4d4d;
+            animation: float 5s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-30px) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .text {
+                font-size: 2em;
+            }
+
+            .heart {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Reproductor de audio de fondo -->
+    <audio autoplay loop>
+    <source src="evening-glow-soft-piano-music-243818.mp3" type="audio/mp3">
+    Tu navegador no soporta la etiqueta de audio.
+	</audio>
+
+    <div class="text">Que bonita eres Idalia.</div>
+    <div class="text">Me gustas muchísimo</div>
+
+    <script>
+        const body = document.body;
+
+        function createHeartsGrid() {
+            const heartsPerRow = Math.ceil(window.innerWidth / 50);
+            const rows = Math.ceil(window.innerHeight / 50);
+
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < heartsPerRow; col++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '\u2665'; // Unicode for ♥
+                    heart.style.left = `${col * 50}px`;
+                    heart.style.top = `${row * 50}px`;
+                    heart.style.animationDelay = `${Math.random() * 5}s`;
+                    body.appendChild(heart);
+                }
+            }
+        }
+
+        createHeartsGrid();
+
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.heart').forEach(heart => heart.remove());
+            createHeartsGrid();
+        });
+    </script>
+</body>
+</html>
